@@ -1,58 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:test_app_browserstack/listview_page.dart';
+import 'package:test_app_browserstack/text_overflow_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MaterialApp(home: HomePage()));
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Test App'),
-        ),
-        body: Center(
-child: Column(
-  children: [
-    Text('Header'),
-    ListView(
-     children: [
-       ListTile(
-         leading: Icon(Icons.map),
-         title: Text('Map'),
-       ),
-       ListTile(
-         leading: Icon(Icons.train),
-         title: Text('Train'),
-       ),
-       ListTile(
-         leading: Icon(Icons.access_alarm),
-         title: Text('Alarm'),
-       ),
-       ListTile(
-         leading: Icon(Icons.add_a_photo),
-         title: Text('Photo'),
-       ),
-       ListTile(
-         leading: Icon(Icons.ac_unit),
-         title: Text('Ac Unit'),
-       ),
-       ListTile(
-         leading: Icon(Icons.airplay),
-         title: Text('Airplay'),
-       ),
-       ListTile(
-         leading: Icon(Icons.backup),
-         title: Text('Backup'),
-       ),
-     ],
-    )
-  ],
-),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home"),
       ),
-      )
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ListViewPage()),
+              );
+            },
+            child: const Text("List View Page"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TextOverflowPage()),
+              );
+            },
+            child: const Text("Text Overflow page"),
+          ),
+        ],
+      ),
     );
   }
 }

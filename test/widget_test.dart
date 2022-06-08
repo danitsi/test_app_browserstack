@@ -1,22 +1,32 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:test_app_browserstack/main.dart';
+import 'package:test_app_browserstack/main.dart' as mainapp;
 
 void main() {
-  testWidgets('recreating vertical viewport was given unbounded height issue', (WidgetTester tester) async {
+  testWidgets('test script for  list View unbounded height given error ',
+      (WidgetTester tester) async {
+    mainapp.main();
 
-    await tester.pumpWidget(MyApp());
-    expect(find.text('Backup'), findsNothing);
-    await tester.tap(find.byIcon(Icons.backup));
+    await tester.pumpAndSettle();
+
+    expect(find.text('List View Page'), findsOneWidget);
+
+    await tester.tap(find.text('List View Page'));
     await tester.pump();
-    expect(find.text('Backup'), findsOneWidget);
+
+    expect(
+        find.byKey(const Key('ListView'), skipOffstage: false), findsWidgets);
+  });
+
+  testWidgets('test script for  text overflow ', (WidgetTester tester) async {
+    mainapp.main();
+    await tester.pumpWidget(
+      Row(
+        textDirection: TextDirection.ltr,
+        children: <Widget>[
+          Container(width: 10000000),
+        ],
+      ),
+    );
   });
 }
